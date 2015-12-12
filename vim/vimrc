@@ -1,0 +1,83 @@
+source $HOME/.vim/bundles.vim
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => General
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+
+let mapleader="," " Easier map leader
+
+set history=1389 " Sets how many lines of history
+
+filetype on " detect filetypes
+
+" Reading/Writing
+set noautowrite " Never write a file unless I request it.
+set noautowriteall " NEVER.
+
+" Normal mode noremaps
+nnoremap ; :
+nnoremap <space> za
+nnoremap <C-J> <C-W><C-J>
+nnoremap <C-K> <C-W><C-K>
+nnoremap <C-L> <C-W><C-L>
+nnoremap <C-H> <C-W><C-H>
+
+" Insert mode noremaps
+inoremap jk <esc>
+
+" Visual mode noremaps
+vnoremap <silent> * :call VisualSelection('f')<CR>
+vnoremap <silent> # :call VisualSelection('b')<CR>
+
+" Mappings
+map <leader>n :NERDTreeToggle<CR>
+map <leader>rm :call delete(@%) \| bdelete!<CR>
+map j gj
+map k gk
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => VIM user interface
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+
+set ls=2 " Always show status line
+set confirm " prompt if closing with unsaved changes
+set ruler " Always show current position
+set cursorline "highlight current line
+set number "line numbering
+set relativenumber
+set cmdheight=3 " Set height of command bar
+set showmatch " Show matching brackets when text indicator is over them
+set mat=5 " How many tenths of a second to blink
+set visualbell " Blink screen instead of sound
+set splitbelow " Open new file in screen below on horizontal split
+set splitright " Open new file in screen to right on vertical split
+set hlsearch " Turn on highlighting while search
+set incsearch " Incremental search
+set foldmethod=indent " Enable folding on indent
+set foldlevel=99 " Folds open initially
+let g:SimpylFold_docstring_preview=1 " Show docstring when folded
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => Colors and Fonts
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+syntax enable
+set t_Co=256 "enable 256 colors
+set background=dark
+let python_highlight_all=1 " Highlight python
+colorscheme zenburn
+
+
+set encoding=utf-8
+set ffs=unix,dos,mac
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => Text, tab and indent related
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+" Syntax check for python files on write
+autocmd BufWritePost *.py call Flake8()
+
+set wrap "Wrap lines
