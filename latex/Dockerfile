@@ -1,4 +1,4 @@
-FROM ubuntu:precise
+FROM ubuntu:latest
 
 RUN apt-get update && apt-get install -y \
 	wget \
@@ -7,14 +7,10 @@ RUN apt-get update && apt-get install -y \
 RUN wget http://mirror.ctan.org/systems/texlive/tlnet/install-tl-unx.tar.gz && \
 	tar -xzf install-tl-unx.tar.gz && \
 	rm install-tl-unx.tar.gz && \
-	mv install-tl-* install-tl
-
-WORKDIR /install-tl
-
-RUN echo "selected_scheme scheme-medium" > scheme-medium.profile && \
-	./install-tl --profile=scheme-medium.profile
+	mv install-tl-* install-tl &&  \
+	echo "selected_scheme scheme-full" > /install-tl/scheme-full.profile && \
+	/install-tl/install-tl --profile=/install-tl/scheme-full.profile
 
 RUN ln -s /usr/local/texlive/*/bin/x86_64-linux/* /usr/local/bin/
 
-RUN mkdir /workdir
 WORKDIR /workdir
