@@ -30,6 +30,8 @@ ask=FALSE)' && \
 	R CMD INSTALL PopSV_1.0.tar.gz && \
 	rm -rf PopSV_1.0.tar.gz
 
+RUN echo "cluster.functions = makeClusterFunctionsMulticore()" > $HOME/.BatchJobs.R && echo "staged.queries = TRUE" >> $HOME/.BatchJobs.R
+
 USER $USER
 
 WORKDIR $HOME
