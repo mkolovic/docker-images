@@ -1,4 +1,4 @@
-FROM ubuntu:latest
+FROM mkbase:latest
 
 RUN apt-get update && apt-get install -y \
 	wget \
@@ -8,9 +8,44 @@ RUN wget http://mirror.ctan.org/systems/texlive/tlnet/install-tl-unx.tar.gz && \
 	tar -xzf install-tl-unx.tar.gz && \
 	rm install-tl-unx.tar.gz && \
 	mv install-tl-* install-tl &&  \
-	echo "selected_scheme scheme-full" > /install-tl/scheme-full.profile && \
-	/install-tl/install-tl --profile=/install-tl/scheme-full.profile
+	echo "selected_scheme scheme-basic" > /install-tl/scheme-basic.profile && \
+	/install-tl/install-tl --profile=/install-tl/scheme-basic.profile && \
+	ln -s /usr/local/texlive/*/bin/x86_64-linux/* /usr/local/bin/
 
-RUN ln -s /usr/local/texlive/*/bin/x86_64-linux/* /usr/local/bin/
+RUN tlmgr install \
+	algorithm2e \
+	appendix \
+	biblatex \
+	bigfoot \
+	caption \
+	cleveref \
+	datatool \
+	enumitem \
+	etoolbox \
+	fp \
+	glossaries \
+	isodate \
+	l3kernel \
+	l3packages \
+	listings \
+	logreq \
+	mfirstuc \
+	microtype \
+	ntheorem \
+	parskip \
+	relsize \
+	setspace \
+	siunitx \
+	substr \
+	textcase \
+	titlesec \
+	tocloft \
+	ulem \
+	xfor \
+	xkeyval
 
-WORKDIR /workdir
+RUN mkdir $HOME/files && chown $USER:$USER $HOME/files
+
+USER $USER
+
+WORKDIR $HOME/files
