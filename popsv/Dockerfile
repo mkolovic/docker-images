@@ -15,6 +15,7 @@ RUN echo "deb http://cran.utstat.utoronto.ca/bin/linux/ubuntu trusty/" >> /etc/a
 RUN R -e 'source("http://bioconductor.org/biocLite.R");\
 biocLite(pkgs=c("BSgenome.Hsapiens.UCSC.hg19",\
 "Rsamtools",\
+"BatchJobs",\
 "qvalue",\
 "DNAcopy",\
 "devtools",\
