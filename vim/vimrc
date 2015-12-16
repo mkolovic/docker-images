@@ -10,6 +10,7 @@ let mapleader="," " Easier map leader
 set history=1389 " Sets how many lines of history
 
 filetype on " detect filetypes
+filetype plugin indent on
 
 " Reading/Writing
 set noautowrite " Never write a file unless I request it.
