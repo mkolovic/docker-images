@@ -1,4 +1,4 @@
-FROM ubuntu:latest
+FROM ubuntu:16.04
 MAINTAINER mkolovic@uwaterloo.ca
 
 RUN dpkg-reconfigure locales && \
