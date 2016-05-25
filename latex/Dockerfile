@@ -1,4 +1,4 @@
-FROM mkbase:latest
+FROM mkbase:16.04
 
 RUN apt-get update && apt-get install -y \
 	wget \
@@ -13,9 +13,18 @@ RUN wget http://mirror.ctan.org/systems/texlive/tlnet/install-tl-unx.tar.gz && \
 	ln -s /usr/local/texlive/*/bin/x86_64-linux/* /usr/local/bin/ && \
 	mkdir $HOME/files $HOME/bin
 
+COPY compile.sh $HOME/bin/compile.sh
+
+RUN chown -R $USER:$USER $HOME/files $HOME/bin
+
+ENV PATH $HOME/bin:$PATH
+
+WORKDIR $HOME/files
+
 RUN tlmgr install \
 	algorithm2e \
 	appendix \
+    beamer \
 	biblatex \
 	bigfoot \
 	caption \
@@ -32,6 +41,7 @@ RUN tlmgr install \
 	logreq \
 	mfirstuc \
 	microtype \
+    ms \
 	ntheorem \
 	parskip \
 	relsize \
@@ -45,12 +55,8 @@ RUN tlmgr install \
 	xfor \
 	xkeyval
 
-COPY compile.sh $HOME/bin/compile.sh
-
-RUN chown -R $USER:$USER $HOME/files $HOME/bin
-
 USER $USER
 
-ENV PATH $HOME/bin:$PATH
 
-WORKDIR $HOME/files
+
+
