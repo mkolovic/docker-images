@@ -34,6 +34,7 @@ RUN tlmgr install \
 	etoolbox \
 	fp \
 	glossaries \
+    glossaries-english \
 	isodate \
 	l3kernel \
 	l3packages \
@@ -51,12 +52,10 @@ RUN tlmgr install \
 	textcase \
 	titlesec \
 	tocloft \
+    tracklang \
 	ulem \
 	xfor \
-	xkeyval
+	xkeyval \
+    xstring
 
 USER $USER
-
-
-
-
