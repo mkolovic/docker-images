@@ -1,11 +1,14 @@
-FROM node:0.10
+FROM node:7.2.1
+MAINTAINER Mladen Kolovic
 
-ENV HTML_PDF_URL=http://download.gna.org/wkhtmltopdf/0.12/0.12.2.1/wkhtmltox-0.12.2.1_linux-jessie-amd64.deb
-RUN echo 'deb http://ftp.de.debian.org/debian jessie main' >> /etc/apt/sources.list && \
-	apt-get update && apt-get install -y xfonts-base xfonts-75dpi && \
-	wget $HTML_PDF_URL -qO temp.deb && \
-	dpkg -i temp.deb && rm temp.deb && \
+ENV HTMLPDF http://download.gna.org/wkhtmltopdf/0.12/0.12.4/wkhtmltox-0.12.4_linux-generic-amd64.tar.xz
+ENV PATH $PATH:/usr/local/wkhtmltox/bin
+
+
+RUN wget -qO- $HTMLPDF | tar xJ -C /usr/local && \
 	npm install hackmyresume -g
 
+WORKDIR /root
 
-CMD ["bash"]
+ENTRYPOINT ["hackmyresume"]
+CMD ["--help"]
